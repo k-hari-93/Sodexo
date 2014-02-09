@@ -9,7 +9,7 @@ import argparse,sys
 
 class S0d3x0(object):
     def __init__(self):
-        f = open("dump","a+")
+        f = open("dump")
         if not f.read() == '':
             f.seek(0)
             self._50 = int(f.readline()[:-1])
@@ -25,6 +25,7 @@ class S0d3x0(object):
             self._10 = 0
 
 s = S0d3x0()
+print "\n"*2
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--addBook",help = "Adds a CouponBook",action = "store_true")
@@ -32,4 +33,73 @@ parser.add_argument("--display",help = "Displays the remaining coupons",action =
 parser.add_argument("--bill",help = "Total bill amount",type = int)
 args = parser.parse_args()
 
+try:
+    assert len(sys.argv)<4 and len(sys.argv)>1
+except AssertionError:
+    print "ArgumentError: Type 'python s0d3x0.py -h' for more details"
 
+if args.bill is not None:
+    f = open("dump","w")
+
+    n = args.bill/50
+    if n <= s._50:
+        print "{:^3}{:^3}{:^3}".format(n,'x',"50")
+        f.write("{}{}".format(s._50-n,"\n"))
+        args.bill %= 50
+    else:
+        print "{:^3}{:^3}{:^3}".format(s._50,'x',"50")
+	f.write("{}{}".format(0,"\n"))
+	args.bill -= s._50*50
+
+    n = args.bill/35
+    if n <= s._35:
+        print "{:^3}{:^3}{:^3}".format(n,'x',"35")
+        f.write("{}{}".format(s._35-n,"\n"))
+	args.bill %= 35
+    else:
+	print "{:^3}{:^3}{:^3}".format(s._35,'x',"35")
+	f.write("{}{}".format(0,"\n"))
+	args.bill -= s._35*35
+
+    n = args.bill/20
+    if n <= s._20:
+        print "{:^3}{:^3}{:^3}".format(n,'x',"20")
+        f.write("{}{}".format(s._20-n,"\n"))
+	args.bill %= 20
+    else:
+	print "{:^3}{:^3}{:^3}".format(s._20,'x',"20")
+	f.write("{}{}".format(0,"\n"))
+	args.bill -= s._20*20
+
+    n = args.bill/10
+    if n <= s._10:
+        print "{:^3}{:^3}{:^3}".format(n,'x',"10")
+        f.write("{}{}".format(s._10-n,"\n"))
+	args.bill %= 10
+    else:
+	print "{:^3}{:^3}{:^3}".format(s._10,'x',"10")
+	f.write("{}{}".format(0,"\n"))
+	args.bill -= s._10*10
+
+    print "Rs.{:<5} to be paid in cash.".format(args.bill)
+    f.close()
+
+elif args.addBook is True:
+    f = open("dump","w")
+    s._50 += 10
+    s._35 += 8
+    s._20 += 6
+    s._10 += 10
+    for i in [s._50,s._35,s._20,s._10]:
+        f.write("{}{}".format(i,"\n"))
+
+    print '1 CouponBook added'
+    f.close()
+
+
+else:
+    print "Number of coupons remaining : "
+    print "{:^15}{:^15}{:^15}{:^15}".format("Fifty","Thirty-five","Twenty","Ten")
+    print "{:^15}{:^15}{:^15}{:^15}".format(s._50,s._35,s._20,s._10)
+        
+print "\n"*2
