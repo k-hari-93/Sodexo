@@ -9,7 +9,7 @@ import argparse,sys
 
 class S0d3x0(object):
     def __init__(self):
-        f = open("dump")
+        f = open("dump","a+")
         if not f.read() == '':
             f.seek(0)
             self._50 = int(f.readline()[:-1])
