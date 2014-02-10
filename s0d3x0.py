@@ -37,6 +37,7 @@ try:
     assert len(sys.argv)<4 and len(sys.argv)>1
 except AssertionError:
     print "ArgumentError: Type 'python s0d3x0.py -h' for more details"
+    sys.exit()
 
 if args.bill is not None:
     f = open("dump","w")
