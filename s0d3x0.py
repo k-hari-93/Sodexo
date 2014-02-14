@@ -30,7 +30,7 @@ print "\n"*2
 parser = argparse.ArgumentParser()
 parser.add_argument("--addBook",help = "Adds a CouponBook",action = "store_true")
 parser.add_argument("--display",help = "Displays the remaining coupons",action = "store_true")
-parser.add_argument("--bill",help = "Total bill amount",type = int)
+parser.add_argument("bill",nargs = '?',help = "Total bill amount",type = int)
 args = parser.parse_args()
 
 try:
