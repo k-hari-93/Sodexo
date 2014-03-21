@@ -42,17 +42,17 @@ class CouponBook(object):
 
     def compute(self,amt):
         print "Coupons to be given"
-        x = [int(i)   for i,j in self.denom.items()]
+        x = self.denom.keys()
         x.sort(reverse=True)
         for i in x:
             n = amt/i
-            if n>self.denom[str(i)]:
-                amt -= i*self.denom[str(i)]
-                print "{:^3} of Rs. {:^3}".format(self.denom[str(i)],i)
-                self.denom[str(i)] = 0
+            if n>self.denom[i]:
+                amt -= i*self.denom[i]
+                print "{:^3} of Rs. {:^3}".format(self.denom[i],i)
+                self.denom[i] = 0
             else:
                 amt -= i*n
-                self.denom[str(i)] -= n
+                self.denom[i] -= n
                 print "{:^3} of Rs. {:^3}".format(n,i)
         print "Remaining Rs. {:^3} to be paid in cash".format(amt)
         self.save()
