@@ -26,7 +26,7 @@ class CouponBook(object):
 
     def load(self, book_file):
         f = open(book_file, "r")
-        self.denom = json.load(f)
+        self.denom = {int(k):v for k,v in json.load(f).items()}
 
     def add_book(self):
         book  = {50:10,
