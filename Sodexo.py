@@ -23,7 +23,7 @@ class CouponBook(object):
         f = open(BOOK_FILE,"w")
         json.dump(self.denom,f)
 
-    def add_Book(self):
+    def add_book(self):
         book  = {'50':10,'35':8,'20':6,'10':10}
         for i,j in book.items():
             self.denom[i] += j
@@ -56,7 +56,7 @@ def main():
     args = parser.parse_args()
 
     if args.addBook:
-        s.add_Book()
+        s.add_book()
 
     elif args.display:
         s.show_status()
