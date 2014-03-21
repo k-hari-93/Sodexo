@@ -17,14 +17,20 @@ class CouponBook(object):
             f = open(BOOK_FILE,"a+")
             self.denom = json.load(f)
         else:
-            self.denom = {'50':0,'35':0,'20':0,'10':0}
+            self.denom = {50:0,
+                          35:0,
+                          20:0,
+                          10:0}
 
     def save(self):
         f = open(BOOK_FILE,"w")
         json.dump(self.denom,f)
 
     def add_book(self):
-        book  = {'50':10,'35':8,'20':6,'10':10}
+        book  = {50:10,
+                 35:8,
+                 20:6,
+                 10:10}
         for i,j in book.items():
             self.denom[i] += j
         self.save()
